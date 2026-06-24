@@ -1,0 +1,75 @@
+db.students.insertOne({
+    name: "Rahul",
+    age: 21,
+    marks: 78,
+    dept: "CSE"
+})
+
+db.students.insertMany([
+    {
+        name: "Arjun",
+        age: 20,
+        marks: 80,
+        dept: "CSE"
+    },
+    {
+        name: "Bhavana",
+        age: 21,
+        marks: 85,
+        dept: "AIML"
+    },
+    {
+        name: "Chirag",
+        age: 20,
+        marks: 82,
+        dept: "AIML"
+    }
+])
+
+db.students.updateOne(
+    { name: "Rahul" },
+    { $set: { marks: 81 } }
+)
+
+db.students.find({ name: "Rahul" })
+
+db.students.deleteOne({ name: "Arjun" })
+
+db.students.deleteMany({
+    age: 20
+})
+
+
+
+3
+
+db.students.insertMany([
+    {
+        _id: 1,
+        name: "A",
+        age: 20,
+        marks: 75
+    },
+    {
+        _id: 2,
+        name: "B",
+        age: 20,
+        marks: 80
+    }
+])
+
+db.students.find(
+    {},
+    {
+        name: 1,
+        age: 1,
+        marks: 1
+    }
+)
+
+db.students.find(
+    {},
+    {
+        dept: 0
+    }
+)
