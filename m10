@@ -1,0 +1,41 @@
+db.catalog.aggregate([
+    {
+        $match: {
+            $text: {
+                $search: "data"
+            }
+        }
+    },
+    {
+        $match: {
+            $and: [
+                {
+                    title: {
+                        $not: /python/i
+                    }
+                },
+                {
+                    description: {
+                        $not: /python/i
+                    }
+                }
+            ]
+        }
+    },
+    {
+        $project: {
+            title: 1,
+            description: 1,
+            score: {
+                $meta: "textScore"
+            }
+        }
+    },
+    {
+        $sort: {
+            score: {
+                $meta: "textScore"
+            }
+        }
+    }
+])
