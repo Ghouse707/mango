@@ -1,0 +1,97 @@
+db.employee.insertMany([
+    {
+        name: "A",
+        age: 30,
+        salary: 50000
+    },
+    {
+        name: "B",
+        age: 25,
+        salary: 55000
+    },
+    {
+        name: "C",
+        age: 23,
+        salary: 60000
+    },
+    {
+        name: "D",
+        age: 24,
+        salary: 65000
+    },
+    {
+        name: "E",
+        age: 21,
+        salary: 58000
+    },
+    {
+        name: "F",
+        age: 23,
+        salary: 60000
+    }
+])
+
+db.employee.find(
+    {},
+    {
+        name: 1,
+        salary: 1,
+        _id: 0
+    }
+)
+
+db.employee.find(
+    {},
+    {
+        name: 1,
+        salary: 1,
+        _id: 0
+    }
+).limit(5)
+
+
+
+5
+
+
+db.students.insertMany([
+    { _id: 1, name: "Rani", age: 20, marks: 80 },
+    { _id: 2, name: "Abi", age: 20, marks: 70 },
+    { _id: 3, name: "Hema", age: 20, marks: 40 },
+    { _id: 4, name: "Ram", age: 20, marks: 75 },
+    { _id: 5, name: "Maggie", age: 20, marks: 90 }
+])
+
+db.students.find({
+    marks: { $gt: 75 }
+})
+
+db.students.find({
+    marks: { $lt: 75 }
+})
+
+db.students.find({
+    marks: { $eq: 90 }
+})
+
+db.students.find({
+    marks: { $ne: 70 }
+})
+
+db.students.find({
+    marks: { $in: [80, 90] }
+})
+
+db.students.find({
+    $and: [
+        { marks: { $gt: 80 } },
+        { age: { $lt: 25 } }
+    ]
+})
+
+db.students.find({
+    $or: [
+        { marks: { $gt: 80 } },
+        { age: { $lt: 20 } }
+    ]
+})
