@@ -1,0 +1,56 @@
+db.catalog.insertMany([
+    {
+        title: "Data Science for Beginners",
+        description: "An introductory book on data science"
+    },
+    {
+        title: "Advanced ML",
+        description: "A deep dive into ML algorithms"
+    },
+    {
+        title: "MongoDB in Action",
+        description: "A comprehensive guide to MongoDB"
+    },
+    {
+        title: "Data Analytics with Python",
+        description: "Learn data analysis using Python"
+    },
+    {
+        title: "Introduction to Big Data",
+        description: "Basics of big data technologies"
+    }
+])
+
+db.catalog.createIndex({
+    title: "text",
+    description: "text"
+})
+
+// Text search
+db.catalog.find({
+    $text: {
+        $search: "data"
+    }
+})
+
+
+
+db.catalog.aggregate([
+    {
+        $match: {
+            $text: {
+                $search: "data"
+            }
+        }
+    },
+    {
+        $match: {
+            title: {
+                $not: /python/i
+            },
+            description: {
+                $not: /python/i
+            }
+        }
+    }
+])
