@@ -1,0 +1,128 @@
+use college
+
+db.createCollection("students")
+
+db.students.insertOne({
+    name: "Rahul",
+    age: 20,
+    marks: 80
+})
+
+db.students.insertMany([
+    {
+        name: "Ram",
+        age: 21,
+        marks: 85
+    },
+    {
+        name: "Amulya",
+        age: 22,
+        marks: 79
+    },
+    {
+        name: "Anagha",
+        age: 20,
+        marks: 90
+    }
+])
+
+// AND condition
+db.students.find({
+    age: { $gt: 20 },
+    marks: { $gt: 80 }
+})
+
+// OR condition
+db.students.find({
+    $or: [
+        { age: 20 },
+        { marks: 79 }
+    ]
+})
+
+
+use college
+
+db.createCollection("students")
+
+// Insert one document
+db.students.insertOne({
+    name: "Rahul",
+    age: 21,
+    marks: 78,
+    dept: "CSE"
+})
+
+// Insert multiple documents
+db.students.insertMany([
+    {
+        name: "Arjun",
+        age: 20,
+        marks: 80,
+        dept: "CSE"
+    },
+    {
+        name: "Bhavana",
+        age: 21,
+        marks: 85,
+        dept: "AIML"
+    },
+    {
+        name: "Chirag",
+        age: 20,
+        marks: 82,
+        dept: "AIML"
+    }
+])
+
+// Update one document
+db.students.updateOne(
+    { name: "Rahul" },
+    { $set: { marks: 81 } }
+)
+
+// Find document
+db.students.find({ name: "Rahul" })
+
+// Delete one document
+db.students.deleteOne({ name: "Arjun" })
+
+// Delete multiple documents
+db.students.deleteMany({
+    age: 20
+})
+
+
+
+db.students.insertMany([
+    {
+        _id: 1,
+        name: "A",
+        age: 20,
+        marks: 75
+    },
+    {
+        _id: 2,
+        name: "B",
+        age: 20,
+        marks: 80
+    }
+])
+
+// Display selected fields
+db.students.find(
+    {},
+    {
+        name: 1,
+        age: 1,
+        marks: 1
+    }
+)
+
+// Exclude department field
+db.students.find(
+    {},
+    {
+        dept: 0
+    }
+)
