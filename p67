@@ -1,0 +1,54 @@
+db.places.insertMany([
+    {
+        name: "Park",
+        location: {
+            type: "Point",
+            coordinates: [77.59, 12.97]
+        }
+    },
+    {
+        name: "Mall",
+        location: {
+            type: "Point",
+            coordinates: [77.60, 12.98]
+        }
+    }
+])
+
+db.places.createIndex({
+    location: "2dsphere"
+})
+
+db.places.find({
+    location: {
+        $near: {
+            $geometry: {
+                type: "Point",
+                coordinates: [77.59, 12.97]
+            },
+            $maxDistance: 5000
+        }
+    }
+})
+
+
+7
+
+db.devices.insertMany([
+    { device: "Sensor1", status: 5 },
+    { device: "Sensor2", status: 3 },
+    { device: "Sensor3", status: 1 },
+    { device: "Sensor4", status: 4 }
+])
+
+db.devices.find({
+    status: { $bitsAllSet: [0] }
+})
+
+db.devices.find({
+    status: { $bitsAnySet: [0, 1] }
+})
+
+db.devices.find({
+    status: { $bitsAllClear: [1] }
+})
