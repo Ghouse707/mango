@@ -1,0 +1,81 @@
+[10:40 am, 22/10/2026] Mohammed Ghouse: import nltk
+import random
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+from nltk.classify import NaiveBayesClassifier
+nltk.download('punkt')
+nltk.download('punkt_tab')
+nltk.download('stopwords')
+# Sample dataset
+messages = [
+    ("Win a free prize now", "spam"),
+    ("You won a gift", "spam"),
+    ("Are we meeting today", "ham"),
+    ("Please call me", "ham"),
+    ("Win a free car", "spam"),
+    ("Let us meet tomorrow", "ham")
+]
+# Remove stop words
+stop_words = set(stopwords.words('english'))
+def preprocess(message):
+    words = word_tokenize(message.lower())
+    return [
+        w for w in words
+        if w.isalpha() and w not in stop_words
+    ]
+# Extract features
+def extract_features(words):
+    return {word: True for word in…
+[10:40 am, 22/10/2026] Mohammed Ghouse: import pandas as pd
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+
+# Sample dataset
+data = [
+    ("Deep learning is transforming AI", "Technology"),
+    ("Tips for a healthy lifestyle", "Health"),
+    ("Exploring mountains in Switzerland", "Travel"),
+    ("Quantum computing and technology", "Technology"),
+    ("Yoga improves mental health", "Health"),
+    ("Trip to Japan", "Travel"),
+    ("AI in healthcare", "Technology")
+]
+
+# Create dataset
+df = pd.DataFrame(data, columns=["text", "label"])
+
+# Convert text into numerical features
+tfidf = TfidfVectorizer(stop_words="english")
+X = tfidf.fit_transform(df["text"])
+y = df["label"]
+
+# Split data
+…
+[10:40 am, 22/10/2026] Mohammed Ghouse: from inltk.inltk import setup, get_similar_sentences
+
+# Setup Kannada language
+setup('kn')
+
+# Function to generate similar sentences
+def paraphrase_text(text, num_variants=5):
+    result = get_similar_sentences(
+        text,
+        num_variants,
+        'kn',
+        degree_of_aug=0.2
+    )
+    return result
+
+# Input sentence
+text = "ನಾನು ಇಂದು ಬಹಳ ಸಂತೋಷವಾಗಿದ್ದೇನೆ"
+
+# Generate paraphrases
+paraphrases = paraphrase_text(text, 5)
+
+# Display results
+print("Original Sentence:", text)
+print("\nParaphrased Sentences:")
+
+for i, sentence in enumerate(paraphrases, 1):
+    print(f"{i}. {sentence}")
